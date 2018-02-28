@@ -22,5 +22,5 @@ templates/
 ```shell
 cd ansible_space
 
-ansible-playbook -i hosts playbooks/scrapy.yml
+ansible-playbook -i hosts playbooks/scrapy.yml -sudo
 ```
