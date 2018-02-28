@@ -1,0 +1,7 @@
+
+---
+  - hosts: scrapy_boxes
+    remote_user: alex
+    roles:
+    - scrapy
+      

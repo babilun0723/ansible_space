@@ -1,0 +1,44 @@
+
+---
+    - name: Install epel 
+      yum: 
+        name: epel-release
+        state: present
+
+    - name: Install yum packages
+      yum: 
+        name: "{{item}}"
+        state: present
+      with_items:
+        - gcc
+        - python-pip
+        - libffi-devel
+        - python-devel
+        - openssl-devel
+        - libxslt-devel
+        - libxml++-devel
+        - libxml2-devel
+        - git 
+    - name: Install pip packages
+      pip: 
+        name: "{{item}}"
+        state: present
+      with_items:
+        - lxml 
+        - incremental
+        - HTMLParser
+        - scrapy
+        - service_identity
+    
+    - name: Add email address to ~/.gitconfig
+      become_user: alex
+      git_config:
+        name: user.email
+        scope: global
+        value: "lxie@fastenal.com"
+    - name: Add name to ~/.gitconfig
+      become_user: alex
+      git_config:
+        name: user.name
+        scope: global
+        value: "Alex Xie"   
