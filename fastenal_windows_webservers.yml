@@ -1,0 +1,15 @@
+---
+  - hosts: fastenal_windows_webservers
+    roles: 
+      - IISwebserver
+    gather_facts: False
+    vars_prompt:
+       - name: "UserName"
+         prompt: "UserName"
+         private: no
+       
+       - name: "Password"
+         prompt: "Password"
+         private: yes
+    
+      

@@ -1,8 +1,9 @@
-[fastenal_windows_webservers]
+[fastenal_smsmisc_webservers]
+
+smsmisc-web01-d
 
 
-
-[fastenal_windows_webservers:vars]
+[fastenal_smsmisc_webservers:vars]
 ansible_user={{ UserName }}
 ansible_password={{ Password }}
 ansible_port=5986
@@ -10,12 +11,13 @@ ansible_connection=winrm
 ansible_winrm_server_cert_validation=ignore
 
 
-[fastenal_smsmisc_webservers]
 
-smsmisc-web01-d
+[fastenal_windows_webservers]
+
+b-dotnetdeploy
 
 
-[fastenal_smsmisc_webservers:vars]
+[fastenal_windows_webservers:vars]
 ansible_user={{ UserName }}
 ansible_password={{ Password }}
 ansible_port=5986

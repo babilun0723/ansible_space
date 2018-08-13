@@ -1,0 +1,57 @@
+
+---
+  - name: Install Notepad++ with Chocolatey
+    win_chocolatey:
+      name: notepadplusplus
+      state: present
+
+  - name: Install Octopus Tentacle with Chocolatey
+    win_chocolatey:
+      name: octopusdeploy.tentacle
+      state: present
+      
+  - name: Install IIS Web-Server with sub features and management tools
+    win_feature:
+      name: Web-Server 
+      state: present
+      include_sub_features: True
+      include_management_tools: True
+    register: win_feature
+  
+  - name: Install other IIS related features
+    win_feature:
+      name: Web-WebServer,Web-Common-Http,Web-Default-Doc,Web-Dir-Browsing,Web-Http-Errors,Web-Static-Content,Web-Health,Web-Http-Logging,Web-Request-Monitor,Web-Http-Tracing,Web-Performance,Web-Stat-Compression,Web-Security,Web-Filtering,Web-Windows-Auth,Web-App-Dev,Web-Net-Ext45,Web-Asp-Net45,Web-ISAPI-Ext,Web-ISAPI-Filter,Web-Mgmt-Tools,Web-Mgmt-Console,Web-IP-Security,NET-Framework-45-ASPNET,NET-WCF-HTTP-Activation45,ManagementOdata,DSC-Service,WAS,WAS-Process-Model,WAS-Config-APIs
+      state: present
+
+  - name: Install IIS UrlRewriteModule with Chocolatey
+    win_chocolatey:
+      name: urlrewrite
+      state: present
+      
+  - name: Install .net Framework 4.6.2 with Chocolatey
+    win_chocolatey:
+      name: dotnet4.6.2
+      state: present
+      expected_return_code: [0, 666, 3010]
+
+  - name: Install DotNet Core Windows Hosting Module with Chocolatey
+    win_chocolatey:
+      name: dotnetcore-windowshosting
+      state: present
+      
+  - name: Copy website certificate file
+    win_copy:
+      src: /mnt/c/Users/lxie/workspace/ansible_space/star.dmo.fastenal.com.pfx
+      dest: C:\star.dmo.fastenal.com.pfx
+
+  - name: Import website certificate
+    win_certificate_store:
+      path: C:\star.dmo.fastenal.com.pfx
+      state: present
+      password: Fastenal!
+      store_location: LocalMachine
+      store_name: My
+  
+  - name: reboot if installing Web-Server feature requires it
+    win_reboot:
+    when: win_feature.reboot_required

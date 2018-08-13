@@ -1,0 +1,11 @@
+---
+- hosts: '{{ host_name }}'
+  gather_facts: yes
+  become: true
+  become_method: dzdo
+  become_user: root
+  vars: 
+    shadowsocks_password: 6NIiz23!
+    shadowsocks_config_server_port: 8388
+  roles:
+    - ansible-shadowsocks

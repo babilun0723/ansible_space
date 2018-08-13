@@ -1,0 +1,78 @@
+
+---
+  - name: Install Notepad++ with Chocolatey
+    win_chocolatey:
+      name: notepadplusplus
+      state: present
+
+  - name: Install Octopus Tentacle with Chocolatey
+    win_chocolatey:
+      name: octopusdeploy.tentacle
+      state: present
+  
+  - name: Install DotNet Core Windows Hosting Module with Chocolatey
+    win_chocolatey:
+      name: dotnetcore-windowshosting
+      state: present
+  
+  - name: Install IIS UrlRewriteModule with Chocolatey
+    win_chocolatey:
+      name: urlrewrite
+      state: present
+      
+  - name: Install .net Framework 4.7.1 with Chocolatey
+    win_chocolatey:
+      name: dotnet4.7.1
+      state: present
+      expected_return_code: [0, 666, 3010]
+      
+  - name: Enable MSMQ Windows Feature
+    win_feature:
+      name: MSMQ
+      state: present
+  
+  - name: Create Fastenal directory
+    win_file:
+      path: C:\Program Files\Fastenal\Fastenal.PricingReviewImportData.FileProcessorService
+      state: directory
+
+  - name: Set TNS_ADMIN environment variable for all users
+    win_environment:
+      state: present
+      name: TNS_ADMIN
+      value: C:\Oracle
+      level: machine
+
+  - name: Copy website certificate file1
+    win_copy:
+      src: /mnt/c/Users/lxie/workspace/ansible_space/star.dmo.fastenal.com.pfx
+      dest: C:\star.dmo.fastenal.com.pfx
+
+  - name: Copy website certificate file2
+    win_copy:
+      src: /mnt/c/Users/lxie/workspace/ansible_space/star.api.fastenal.com.pfx
+      dest: C:\star.api.fastenal.com.pfx
+
+  - name: Import website certificate1
+    win_certificate_store:
+      path: C:\star.dmo.fastenal.com.pfx
+      state: present
+      password: Fastenal!
+      store_location: LocalMachine
+      store_name: My
+
+  - name: Import website certificate2
+    win_certificate_store:
+      path: C:\star.api.fastenal.com.pfx
+      state: present
+      password: Fastenal!
+      store_location: LocalMachine
+      store_name: My
+  
+  - name: Add a HTTPS binding for Default Web Site
+    win_iis_webbinding:
+      name: Default Web Site
+      protocol: https
+      port: 443
+      certificate_hash: "01FB88BB0A5DC4DAEB0A1172BF5607C5A8158127"
+      state: present

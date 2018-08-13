@@ -1,0 +1,11 @@
+[fastenal_smsmisc_webservers]
+
+smsmisc-web01-s
+smsmisc-web02-s
+
+[fastenal_smsmisc_webservers:vars]
+ansible_user={{ UserName }}
+ansible_password={{ Password }}
+ansible_port=5986
+ansible_connection=winrm
+ansible_winrm_server_cert_validation=ignore

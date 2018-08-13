@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\playbooks\\roles",
+    "\\playbooks\\roles\\scrapy",
+    "\\playbooks\\roles\\scrapy\\tasks",
+    "\\playbooks\\roles\\shadowsocks",
+    "\\playbooks\\roles\\shadowsocks\\tasks",
+    "\\playbooks\\roles\\shadowsocks\\vars",
+    "\\playbooks\\roles\\winwebserver"
+  ],
+  "SelectedNode": "\\hosts",
+  "PreviewInSolutionExplorer": false
+}

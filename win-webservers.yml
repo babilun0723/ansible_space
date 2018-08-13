@@ -1,0 +1,16 @@
+---
+
+- hosts: windows_webservers
+  roles: 
+    - IISwebserver
+  gather_facts: false
+  vars_prompt:
+      - name: "UserName"
+        prompt: "UserName"
+        private: no
+      
+      - name: "Password"
+        prompt: "Password"
+        private: no
+
+      

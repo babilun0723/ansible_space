@@ -1,10 +1,13 @@
+###### git clone from https://github.com/babilun0723
+
 ## anisble_space
 
 
 **anisble_space folder structure**
 
 ```
-hosts
+<lifecyclename>   --Such as test
+     host
 playbooks
 roles/
     <roleName>/
